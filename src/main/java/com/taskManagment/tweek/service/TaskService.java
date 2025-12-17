@@ -7,7 +7,6 @@ import com.taskManagment.tweek.dto.TaskResponse;
 import com.taskManagment.tweek.entity.Task;
 import com.taskManagment.tweek.repository.TaskRepository;
 import com.taskManagment.tweek.util.CommonMethods;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,9 +19,15 @@ public class TaskService {
     }
     public TaskResponse createTask(TaskRequest taskRequest){
         validateTaskRequest(taskRequest);
-        Task task= Task.builder().taskId(CommonMethods.getConanicalId()).title(taskRequest.getTitle())
-                .description(taskRequest.getDescription()).dueDate(taskRequest.getDueDate()).status(taskRequest.getStatus())
-                .userName(taskRequest.getUserName()).build();
+        Task task= Task.builder()
+                .taskId(CommonMethods.getConanicalId())
+                .title(taskRequest.getTitle())
+                .description(taskRequest.getDescription())
+                .dueDate(taskRequest.getDueDate())
+                .status(taskRequest.getStatus())
+                .userName(taskRequest.getUserName())
+                .priority(taskRequest.getPriority())
+                .build();
 
         try {
             Task savedTask = taskRepository.save(task);
