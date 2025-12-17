@@ -3,6 +3,7 @@ package com.taskManagment.tweek.service;
 import com.taskManagment.tweek.dto.UserRegisterRequest;
 import com.taskManagment.tweek.entity.Users;
 import com.taskManagment.tweek.repository.UsersRepository;
+import com.taskManagment.tweek.util.CommonMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +20,7 @@ public class UserService {
     }
     PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
     public String addUser(UserRegisterRequest userRequest) {
-        String  conanicalId=getConanicalId();
+        String  conanicalId= CommonMethods.getConanicalId();
         Users user=Users.builder()
                             .id(conanicalId)
                             .role("ROLE_USER")
@@ -30,7 +31,5 @@ public class UserService {
         usersRepository.save(user);
         return "success";
     }
-    private String getConanicalId(){
-        return UUID.randomUUID().toString().replace("-","");
-    }
+
 }
