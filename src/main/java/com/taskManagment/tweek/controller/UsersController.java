@@ -2,6 +2,8 @@ package com.taskManagment.tweek.controller;
 
 import com.taskManagment.tweek.config.JwtService;
 import com.taskManagment.tweek.dto.AuthRequest;
+import com.taskManagment.tweek.dto.UserRegisterRequest;
+import com.taskManagment.tweek.entity.Users;
 import com.taskManagment.tweek.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,4 +42,11 @@ public class UsersController {
             throw new RuntimeException("Invalid UserRequest");
         }
     }
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody UserRegisterRequest user){
+       // user.setRole("ROLE_USER");
+        logger.info("Inside addStudent method...");
+        return  new ResponseEntity<>(userService.addUser(user),HttpStatus.CREATED);
+    }
+
 }

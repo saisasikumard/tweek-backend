@@ -36,7 +36,14 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/users/authenticate","/users/signup","/users/test") // Add this specific matcher
+                        .requestMatchers("/users/authenticate","/users/register","/users/test",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/v2/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        ) // Add this specific matcher
                         .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
