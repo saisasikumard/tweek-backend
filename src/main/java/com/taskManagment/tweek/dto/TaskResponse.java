@@ -18,5 +18,4 @@ public class TaskResponse {
     private LocalDate dueDate;
     private String status;
     private String userName;
-    private String message;
 }
