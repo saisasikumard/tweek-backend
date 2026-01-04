@@ -31,7 +31,7 @@ public class Task {
     String priority;
     @Column(name = "dueDate")
     LocalDate dueDate;
-    @Column(name = "userName",unique = true)
+    @Column(name = "userName")
     //Timestamp createdTime;
     String userName;
 }
