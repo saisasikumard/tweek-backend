@@ -2,7 +2,6 @@ package com.taskManagment.tweek.controllerTest;
 
 import com.taskManagment.tweek.controller.TaskController;
 import com.taskManagment.tweek.dto.TaskResponse;
-import com.taskManagment.tweek.entity.Task;
 import com.taskManagment.tweek.service.TaskService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.config.Task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,5 +51,20 @@ public class TaskControllerTest {
         assertEquals(mockResponses,actualResponse.getBody());
         //verify
         verify(taskService, times(1)).getAllTaskDetails(userName);
+    }
+    @Test
+    void getAllTaskdetails_shouldReturnEmptyList_whenuserNameprovided(){
+        //Arrange
+        String userName="userName_empty_list";
+        List<TaskResponse> mockResponse=new ArrayList<>();
+        //mockService
+        when(taskService.getAllTaskDetails(userName)).thenReturn(mockResponse);
+        //ACT
+        ResponseEntity<List<TaskResponse>> actualResponse=taskController.getAllTaskDetails(userName);
+        //Assert
+        assertEquals(new ArrayList<>(),actualResponse.getBody());
+        assertEquals(0,actualResponse.getBody().size());
+          // verify
+        verify(taskService,times(1)).getAllTaskDetails(userName);
     }
 }
