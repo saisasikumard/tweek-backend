@@ -37,12 +37,14 @@ public class TaskIntegrationTest {
     private JwtService jwtService;
     @Autowired
     private TestRestTemplate restTemplate;
-    private String baseUrl;
-    private String jwtToken;
+
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
     private UsersRepository usersRepository;
+
+    private String baseUrl;
+    private String jwtToken;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -61,11 +63,8 @@ public class TaskIntegrationTest {
         testUser.setEmail("john@example.com");
         //testUser.setRoles("ROLE_USER");  // or however you store roles
         usersRepository.save(testUser);
-
         // Generate token for the test user
         jwtToken = jwtService.generateToken("john_doe");
-
-
     }
     @Test
     void createTask_ShouldCreateAndReturnTask_WhenValidRequest(){
